@@ -29,12 +29,17 @@ nextButtonEl.addEventListener("click", () => {
   cardEls[currentCardIndex].setAttribute("class", "card visible");
 });
 
-data.forEach((item) => {
+data.forEach((item, number) => {
   const q = item[0];
   const a = item[1];
 
   const itemEl = document.createElement("div");
   itemEl.setAttribute("class", "card hidden");
+
+  const cardNumberEl = document.createElement("div");
+  cardNumberEl.setAttribute("class", "number");
+  cardNumberEl.textContent = `#${number + 1}`;
+
   const questionEl = document.createElement("div");
   questionEl.setAttribute("class", "question");
   const answerEl = document.createElement("div");
@@ -57,9 +62,10 @@ data.forEach((item) => {
   questionEl.textContent = q;
   answerEl.textContent = "= " + a;
 
-  itemEl.appendChild(buttonEl);
   itemEl.appendChild(questionEl);
   itemEl.appendChild(answerEl);
+  itemEl.appendChild(buttonEl);
+  itemEl.appendChild(cardNumberEl);
 
   listEl.appendChild(itemEl);
 });

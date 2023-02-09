@@ -9,6 +9,7 @@ body {
   margin: 2em 0;
   border: 1px solid #ccc;
   border-radius: 10px;
+  position: relative;
 }
 
 .card.hidden {
@@ -18,7 +19,16 @@ body {
   display: block;
 }
 
+.card .number {
+  color: #999;
+  font-size: 16px;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
 .card button {
+  margin-top: 1em;
   display: block;
 }
 
