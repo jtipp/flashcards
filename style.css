@@ -11,6 +11,13 @@ body {
   border-radius: 10px;
 }
 
+.card.hidden {
+  display: none;
+}
+.card.visible {
+  display: block;
+}
+
 .card button {
   display: block;
 }
@@ -22,5 +29,12 @@ body {
 
 .card .answer {
   padding-left: 0.5em;
+  display: inline-block;
+}
+
+.card .answer.hidden {
+  display: none;
+}
+.card .answer.visible {
   display: inline-block;
 }
