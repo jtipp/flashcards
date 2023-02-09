@@ -1,4 +1,26 @@
 body {
   font-family: monospace;
-  margin: 2em;
+  margin: 4em;
+}
+
+.card {
+  font-size: 24px;
+  padding: 1em;
+  margin: 2em 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.card button {
+  display: block;
+}
+
+.card .question {
+  font-weight: bold;
+  display: inline-block;
+}
+
+.card .answer {
+  padding-left: 0.5em;
+  display: inline-block;
 }
