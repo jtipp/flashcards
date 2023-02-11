@@ -4,29 +4,25 @@ const data = [
   ["Computer", "Počítač"],
 ];
 
-const title = document.getElementsByTagName("h1")[0];
+const title = document.querySelector("h1");
 title.textContent += `(${data.length})`;
 
 const app = document.getElementById("app");
 
 const listEl = document.createElement("div");
-listEl.setAttribute("class", "cards");
+listEl.classList.add("cards");
 
-var currentCardIndex = 0;
+let currentCardIndex = 0;
 
 const nextButtonEl = document.createElement("button");
 nextButtonEl.textContent = "Next card →";
 nextButtonEl.addEventListener("click", () => {
-  currentCardIndex++;
-  if (currentCardIndex > data.length - 1) {
-    currentCardIndex = 0;
-  }
+  currentCardIndex = (currentCardIndex + 1) % data.length;
 
   const cardEls = document.querySelectorAll(".card");
 
-  cardEls.forEach((el) => el.setAttribute("class", "card hidden"));
-
-  cardEls[currentCardIndex].setAttribute("class", "card visible");
+  cardEls.forEach((el) => el.classList.remove("visible"));
+  cardEls[currentCardIndex].classList.add("visible");
 });
 
 data.forEach((item, number) => {
@@ -34,44 +30,34 @@ data.forEach((item, number) => {
   const a = item[1];
 
   const itemEl = document.createElement("div");
-  itemEl.setAttribute("class", "card hidden");
+  itemEl.classList.add("card", "hidden");
 
   const cardNumberEl = document.createElement("div");
-  cardNumberEl.setAttribute("class", "number");
+  cardNumberEl.classList.add("number");
   cardNumberEl.textContent = `#${number + 1}`;
 
   const questionEl = document.createElement("div");
-  questionEl.setAttribute("class", "question");
+  questionEl.classList.add("question");
   const answerEl = document.createElement("div");
-  answerEl.setAttribute("class", "answer hidden");
+  answerEl.classList.add("answer", "hidden");
 
   const buttonEl = document.createElement("button");
   buttonEl.textContent = "Show";
-  buttonEl.isHidden = true;
   buttonEl.addEventListener("click", () => {
-    if (buttonEl.isHidden) {
-      buttonEl.textContent = "Hide";
-      answerEl.setAttribute("class", "answer visible");
-    } else {
-      buttonEl.textContent = "Show";
-      answerEl.setAttribute("class", "answer hidden");
-    }
-    buttonEl.isHidden = !buttonEl.isHidden;
+    answerEl.classList.toggle("visible");
+    buttonEl.textContent = answerEl.classList.contains("visible")
+      ? "Hide"
+      : "Show";
   });
 
   questionEl.textContent = q;
   answerEl.textContent = "= " + a;
 
-  itemEl.appendChild(questionEl);
-  itemEl.appendChild(answerEl);
-  itemEl.appendChild(buttonEl);
-  itemEl.appendChild(cardNumberEl);
-
-  listEl.appendChild(itemEl);
+  itemEl.append(questionEl, answerEl, buttonEl, cardNumberEl);
+  listEl.append(itemEl);
 });
 
-app.appendChild(listEl);
-app.appendChild(nextButtonEl);
+app.append(listEl, nextButtonEl);
 
 const firstCardEl = document.querySelector(".card");
-firstCardEl.setAttribute("class", "card visible");
+firstCardEl.classList.add("visible");
