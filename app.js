@@ -78,7 +78,7 @@ class App {
   }
 
   showNextCard() {
-    this.currentCardIndex = (this.currentCardIndex + 1) % data.length;
+    this.currentCardIndex = (this.currentCardIndex + 1) % this.data.length;
 
     const cardEls = this.appEl.querySelectorAll(".card");
     cardEls.forEach((el) => el.classList.add("hidden"));
@@ -86,11 +86,14 @@ class App {
   }
 }
 
-const data = [
-  ["Food", "Jídlo"],
-  ["Sea", "Moře"],
-  ["Computer", "Počítač"],
-];
+async function fetchData() {
+  const response = await fetch(".netlify/functions/data");
+  const data = await response.json();
+  return data;
+}
 
-const app = new App(data);
-app.run();
+fetchData().then((data) => {
+  console.log(data);
+  const app = new App(data.data);
+  app.run();
+});
