@@ -28,8 +28,8 @@ class App {
   createCard(item, number) {
     const [q, a] = item;
 
-    const itemEl = document.createElement("div");
-    itemEl.classList.add("card", "hidden");
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("card", "hidden");
 
     const cardNumberEl = document.createElement("div");
     cardNumberEl.classList.add("number");
@@ -40,30 +40,35 @@ class App {
     const answerEl = document.createElement("div");
     answerEl.classList.add("answer", "hidden");
 
-    const buttonEl = document.createElement("button");
-    buttonEl.textContent = "Show";
-    buttonEl.addEventListener("click", () =>
-      this.toggleCard(answerEl, buttonEl)
+    cardEl.addEventListener("click", () =>
+      this.toggleCard(cardEl, questionEl, answerEl)
     );
 
     questionEl.textContent = q;
-    answerEl.textContent = `= ${a}`;
+    answerEl.textContent = a;
 
-    itemEl.appendChild(questionEl);
-    itemEl.appendChild(answerEl);
-    itemEl.appendChild(buttonEl);
-    itemEl.appendChild(cardNumberEl);
+    cardEl.appendChild(questionEl);
+    cardEl.appendChild(answerEl);
+    cardEl.appendChild(cardNumberEl);
 
-    this.listEl.appendChild(itemEl);
+    this.listEl.appendChild(cardEl);
   }
 
-  toggleCard(answerEl, buttonEl) {
+  toggleCard(cardEl, questionEl, answerEl) {
+    cardEl.querySelector("div.number").classList.toggle("hidden");
+
     if (answerEl.classList.contains("hidden")) {
-      buttonEl.textContent = "Hide";
-      answerEl.classList.remove("hidden");
+      console.log("click to show front");
+      cardEl.classList.remove("animate-front");
+      cardEl.classList.add("animate-back");
+      cardEl.querySelector("div.question").classList.add("hidden");
+      cardEl.querySelector("div.answer").classList.remove("hidden");
     } else {
-      buttonEl.textContent = "Show";
-      answerEl.classList.add("hidden");
+      console.log("click to show back");
+      cardEl.classList.remove("animate-back");
+      cardEl.classList.add("animate-front");
+      cardEl.querySelector("div.question").classList.remove("hidden");
+      cardEl.querySelector("div.answer").classList.add("hidden");
     }
   }
 

@@ -3,20 +3,40 @@ body {
   margin: 4em;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .card {
   font-size: 24px;
   padding: 1em;
   margin: 2em 0;
   border: 1px solid #ccc;
   border-radius: 10px;
+  box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.4);
+  width: 50vw;
   position: relative;
+  transform: rotateY(0) rotateZ(0);
 }
 
-.card.hidden {
-  display: none;
+.card:hover {
+  cursor: pointer;
 }
-.card.visible {
-  display: block;
+
+.card.animate-front {
+  /* transform: rotate(360deg) scaleX(-1); */
+  /* animation: flip 0.25s ease-in 1; */
+  transform: rotateY(0deg);
+  transition: transform 0.25s;
+}
+
+.card.animate-back {
+  transform: rotateY(180deg);
+  transition: transform 0.25s;
+}
+
+.card.animate-back .answer {
+  transform: rotateY(-180deg);
 }
 
 .card .number {
@@ -32,19 +52,17 @@ body {
   display: block;
 }
 
+.card .question,
+.card .answer {
+  text-align: center;
+}
+
 .card .question {
   font-weight: bold;
-  display: inline-block;
+  display: block;
 }
 
 .card .answer {
   padding-left: 0.5em;
-  display: inline-block;
-}
-
-.card .answer.hidden {
-  display: none;
-}
-.card .answer.visible {
-  display: inline-block;
+  display: block;
 }
