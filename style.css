@@ -1,4 +1,6 @@
 body {
+  color: #222;
+  background: #f5f5f5;
   font-family: Nunito, monospace;
   margin: 4em;
 }
@@ -22,13 +24,20 @@ h1 {
 }
 
 .card {
+  color: #444;
+  background: #fff;
   font-size: 24px;
+  text-align: center;
   padding: 1em;
   margin: 2em 0;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.4);
   width: 50vw;
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   transform: rotateY(0) rotateZ(0);
 }
@@ -55,7 +64,8 @@ h1 {
 
 .card .number {
   color: #999;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 300;
   position: absolute;
   top: 1em;
   right: 1em;
@@ -81,17 +91,25 @@ h1 {
   display: block;
 }
 
-div.next a {
-  color: #000;
+div.next {
   background: #dde3e7;
-  padding: 0.5rem 1.5rem;
   border-radius: 25px;
+  padding: 0.5rem 1.5rem;
   box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
-  user-select: none;
 }
 
-div.next a:hover {
+div.next:hover {
   color: #dde3e7;
   background: #787c7e;
   cursor: pointer;
+}
+
+div.next a {
+  color: #000;
+  text-decoration: none;
+  user-select: none;
+}
+div.next a:hover {
+  color: #dde3e7;
+  background: #787c7e;
 }
