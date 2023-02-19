@@ -1,17 +1,22 @@
 class App {
   constructor(data) {
     this.data = data;
-    this.title = document.querySelector("h1");
-    this.app = document.getElementById("app");
+    this.appEl = document.getElementById("app");
+    this.titleEl = document.querySelector("h1");
     this.listEl = document.createElement("div");
     this.listEl.classList.add("cards");
     this.currentCardIndex = 0;
-    this.nextButtonEl = document.createElement("button");
+    this.nextButtonContainer = document.createElement("div");
+    this.nextButtonContainer.classList.add("next");
+    this.nextButtonEl = document.createElement("a");
     this.nextButtonEl.textContent = "Next card →";
+    this.nextButtonContainer.appendChild(this.nextButtonEl);
   }
 
   run() {
-    this.title.textContent += `(${this.data.length})`;
+    let numCardsEl = document.createElement("small");
+    numCardsEl.textContent = ` (${this.data.length})`;
+    this.titleEl.appendChild(numCardsEl);
 
     this.nextButtonEl.addEventListener("click", () => this.showNextCard());
 
@@ -19,10 +24,10 @@ class App {
       this.createCard(item, number);
     });
 
-    this.app.appendChild(this.listEl);
-    this.app.appendChild(this.nextButtonEl);
+    this.appEl.appendChild(this.listEl);
+    this.appEl.appendChild(this.nextButtonContainer);
 
-    this.app.querySelector(".card").classList.remove("hidden");
+    this.appEl.querySelector(".card").classList.remove("hidden");
   }
 
   createCard(item, number) {
@@ -75,7 +80,7 @@ class App {
   showNextCard() {
     this.currentCardIndex = (this.currentCardIndex + 1) % data.length;
 
-    const cardEls = this.app.querySelectorAll(".card");
+    const cardEls = this.appEl.querySelectorAll(".card");
     cardEls.forEach((el) => el.classList.add("hidden"));
     cardEls[this.currentCardIndex].classList.remove("hidden");
   }

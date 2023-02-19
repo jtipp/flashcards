@@ -1,10 +1,24 @@
 body {
-  font-family: monospace;
+  font-family: Nunito, monospace;
   margin: 4em;
 }
 
 .hidden {
   display: none !important;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: #545758;
+  font-size: 24px;
+  font-weight: 300;
+  margin: 0;
 }
 
 .card {
@@ -65,4 +79,19 @@ body {
 .card .answer {
   padding-left: 0.5em;
   display: block;
+}
+
+div.next a {
+  color: #000;
+  background: #dde3e7;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+  user-select: none;
+}
+
+div.next a:hover {
+  color: #dde3e7;
+  background: #787c7e;
+  cursor: pointer;
 }
