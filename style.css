@@ -19,8 +19,13 @@ body {
 h1 {
   color: #545758;
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 400;
   margin: 0;
+}
+
+h1 small {
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .card {
@@ -54,6 +59,7 @@ h1 {
 }
 
 .card.animate-back {
+  box-shadow: -2px 4px 5px 0px rgba(0,0,0,0.4);
   transform: rotateY(180deg);
   transition: transform 0.25s;
 }
@@ -69,6 +75,7 @@ h1 {
   position: absolute;
   top: 1em;
   right: 1em;
+  user-select: none;
 }
 
 .card button {

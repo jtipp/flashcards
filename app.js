@@ -15,12 +15,13 @@ class App {
 
   run() {
     let numCardsEl = document.createElement("small");
-    numCardsEl.textContent = ` (${this.data.length})`;
+    numCardsEl.textContent = ` / ${this.data.cards.length} cards`;
+    this.titleEl.textContent = this.data.title;
     this.titleEl.appendChild(numCardsEl);
 
     this.nextButtonEl.addEventListener("click", () => this.showNextCard());
 
-    this.data.forEach((item, number) => {
+    this.data.cards.forEach((item, number) => {
       this.createCard(item, number);
     });
 
@@ -59,17 +60,16 @@ class App {
     this.listEl.appendChild(cardEl);
   }
 
-  toggleCard(cardEl, questionEl, answerEl) {
+  toggleCard(cardEl) {
+    const answerEl = cardEl.querySelector("div.answer");
     cardEl.querySelector("div.number").classList.toggle("hidden");
 
     if (answerEl.classList.contains("hidden")) {
-      console.log("click to show front");
       cardEl.classList.remove("animate-front");
       cardEl.classList.add("animate-back");
       cardEl.querySelector("div.question").classList.add("hidden");
       cardEl.querySelector("div.answer").classList.remove("hidden");
     } else {
-      console.log("click to show back");
       cardEl.classList.remove("animate-back");
       cardEl.classList.add("animate-front");
       cardEl.querySelector("div.question").classList.remove("hidden");
@@ -78,22 +78,20 @@ class App {
   }
 
   showNextCard() {
-    this.currentCardIndex = (this.currentCardIndex + 1) % this.data.length;
+    this.currentCardIndex =
+      (this.currentCardIndex + 1) % this.data.cards.length;
 
     const cardEls = this.appEl.querySelectorAll(".card");
     cardEls.forEach((el) => el.classList.add("hidden"));
+
     cardEls[this.currentCardIndex].classList.remove("hidden");
   }
 }
 
-async function fetchData() {
+(async () => {
   const response = await fetch(".netlify/functions/data");
   const data = await response.json();
-  return data;
-}
-
-fetchData().then((data) => {
-  console.log(data);
-  const app = new App(data.data);
+  console.debug(data.cards);
+  const app = new App(data.cards[0]);
   app.run();
-});
+})();
