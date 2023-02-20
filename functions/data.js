@@ -24,12 +24,16 @@ export async function handler(event, context) {
       }
     }
 
-    return { statusCode: 200, body: JSON.stringify(output) };
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(output),
+    };
   } catch (e) {
     console.log(e);
     return {
       statusCode: 500,
-      body: `${e.name}: ${e.message}`,
+      body: JSON.stringify({ error: `${e.name}: ${e.message}` }),
     };
   }
 }
