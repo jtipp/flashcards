@@ -1,6 +1,13 @@
 {
+  "name": "flashcards",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "node-fetch": "^3.3.0"
+    "cheerio": "^1.0.0-rc.1",
+    "node-fetch": "^3.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^12.0"
   }
 }
